@@ -1,0 +1,70 @@
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Expense Tracker</h1>
+
+    <div class="balance">
+        Total Expense: ₹ {{ total }}
+    </div>
+
+    <form action="/add" method="POST">
+
+        <input type="text"
+               name="title"
+               placeholder="Expense Title"
+               required>
+
+        <input type="number"
+               name="amount"
+               placeholder="Amount"
+               required>
+
+        <input type="text"
+               name="category"
+               placeholder="Category"
+               required>
+
+        <button type="submit">
+            Add Expense
+        </button>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>Title</th>
+            <th>Amount</th>
+            <th>Category</th>
+            <th>Action</th>
+        </tr>
+
+        {% for expense in expenses %}
+
+        <tr>
+            <td>{{ expense[1] }}</td>
+            <td>₹ {{ expense[2] }}</td>
+            <td>{{ expense[3] }}</td>
+
+            <td>
+                <a href="/delete/{{ expense[0] }}">
+                    Delete
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+</body>
+</html>
